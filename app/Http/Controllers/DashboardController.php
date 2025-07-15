@@ -20,7 +20,7 @@ class DashboardController extends Controller
     }
 
     public function posts() {
-
+        return view('user.posts');
     }
 
     public function settings() {
