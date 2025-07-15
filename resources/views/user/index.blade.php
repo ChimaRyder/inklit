@@ -1,5 +1,5 @@
 @extends('components/layouts/blog/layout')
 
 @section('main')
-    <livewire:dashboard/>
+    @include('user/partial/sidebar')
 @endsection

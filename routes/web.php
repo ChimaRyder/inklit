@@ -5,13 +5,25 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DashboardController;
+
 Route::get('/', function () {
     return view('blog/index');
 })->name('home');
 
-Route::view('dashboard', 'user/index')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+//Route::view('dashboard', 'user/index')
+//    ->middleware(['auth', 'verified'])
+//    ->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+//    Route::redirect('/', '/feed')->name('dashboard');
+
+    Route::get('/feed', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/write', [DashboardController::class, 'write'])->name('write');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::get('/posts', [DashboardController::class, 'posts'])->name('posts');
+    Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
+});
 
 //Route::middleware(['auth'])->group(function () {
 //    Route::redirect('settings', 'settings/profile');
