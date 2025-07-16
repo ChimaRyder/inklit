@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -24,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts', [DashboardController::class, 'posts'])->name('posts');
     Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
 });
+
+Route::get('/p/{id}', [PostController::class, 'index'])->name('post');
 
 //Route::middleware(['auth'])->group(function () {
 //    Route::redirect('settings', 'settings/profile');

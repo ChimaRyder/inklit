@@ -4,12 +4,19 @@ namespace App\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
+use App\Http\Services\PostService;
 
 class PostForm extends Component
 {
+    private PostService $postService;
+
     public string $title = "";
     public string $body = "";
     public bool $canSubmit = false;
+
+    public function boot(PostService $postService): void {
+        $this->postService = $postService;
+    }
 
     public function render()
     {
@@ -20,11 +27,7 @@ class PostForm extends Component
     {
         $validated_data = $this->validate();
 
-        Post::create([
-            'title' => $validated_data['title'],
-            'body' => $validated_data['body'],
-            'user_id' => auth()->id(),
-        ]);
+        $this->postService->createPost($validated_data);
 
         return redirect()->route('posts');
     }
