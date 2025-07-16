@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
     Route::get('/posts', [DashboardController::class, 'posts'])->name('posts');
     Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
+
+    Route::get('/p/{id}/edit', [DashboardController::class, 'edit'])->name('edit');
 });
 
 Route::get('/p/{id}', [PostController::class, 'index'])->name('post');

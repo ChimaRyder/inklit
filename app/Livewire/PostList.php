@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Http\Services\PostService;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class PostList extends Component
@@ -18,8 +19,13 @@ class PostList extends Component
 
     public function render()
     {
-        $this->posts = $this->postService->getUserPosts();
+        $this->posts = $this->postService->getUserPosts(auth()->user()->id);
 
         return view('livewire.post-list');
+    }
+
+    #[On('updateList')]
+    public function updateOnDelete() {
+        session()->flash('success', 'Post updated successfully');
     }
 }

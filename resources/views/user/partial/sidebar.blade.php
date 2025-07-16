@@ -1,4 +1,4 @@
-<div>
+<div class="">
     <div class="drawer drawer-open">
         <input id="sidebar" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">

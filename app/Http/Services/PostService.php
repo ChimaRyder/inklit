@@ -2,6 +2,7 @@
 namespace App\Http\Services;
 
 use App\Models\Post;
+use App\Models\User;
 
 class PostService {
     public function createPost($request): void
@@ -13,9 +14,9 @@ class PostService {
         ]);
     }
 
-    public function getUserPosts()
+    public function getUserPosts($id)
     {
-        return auth()->user()->posts;
+        return User::find($id)->posts;
     }
 
     public function getAllPosts()
@@ -27,11 +28,28 @@ class PostService {
         return Post::find($id);
     }
 
-    public function updatePost($request): void
+    public function updatePost($id, $request): void
     {
-        Post::update([
-            'title' => $request['title'],
-            'body' => $request['body'],
-        ]);
+        if(!auth()->hasUser()) {
+            redirect()->route('login');
+            return;
+        }
+
+        $post = $this->getPost($id);
+
+        $post->title = $request['title'];
+        $post->body = $request['body'];
+
+        $post->save();
+    }
+
+    public function deletePost($id)
+    {
+        if(!auth()->hasUser()) {
+            redirect()->route('login');
+            return;
+        }
+
+        Post::destroy($id);
     }
 }
