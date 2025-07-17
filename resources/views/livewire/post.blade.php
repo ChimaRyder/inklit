@@ -11,13 +11,13 @@
                 <a href="{{ route('post', $this->post->id) }}" class="text-sm text-gray-500 hover:underline">{{ Carbon::parse($post->created_at)->diffForHumans() }} by {{ $post->user->name }}</a>
             </div>
 
-            @if(auth()->hasUser())
-                @if($post->user_id === auth()->user()->id)
+            @if(auth()->check())
+                @if($post->user_id === auth()->id())
                     <div class="dropdown dropdown-bottom dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost"><x-fas-ellipsis-vertical class="w-5 h-5"/></div>
                         <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                             <li><a href="{{ route('edit', $post->id) }}"><x-fas-edit class="w-4 h-4"/> Edit</a></li>
-                            <li><a wire:click="deletePost({{ $post->id }})" wire:confirm="Are you sure you want to delete this post?"><x-fas-trash-can class="w-4 h-4"/> Delete</a></li>
+                            <li><a wire:click="deletePost" wire:confirm="Are you sure you want to delete this post?"><x-fas-trash-can class="w-4 h-4"/> Delete</a></li>
                         </ul>
                     </div>
                 @endif
@@ -45,8 +45,7 @@
             </div>
         </div>
 
-        @if(Route::currentRouteName() === "post")
-            <livewire:comment-list :post="$post"/>
-        @endif
+        <livewire:comment-list :post="$post" wire:key="post-comments-{{ $post->id }}"/>
+
     </div>
 </div>

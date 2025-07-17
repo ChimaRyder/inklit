@@ -1,5 +1,5 @@
 @extends('user/partial/dashboard')
 
 @section('dashboard-main')
-    <livewire:post-list/>
+    <livewire:feed/>
 @endsection

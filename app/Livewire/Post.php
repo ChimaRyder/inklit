@@ -28,23 +28,24 @@ class Post extends Component
         return view('livewire.post');
     }
 
-    public function deletePost($id)
+    public function deletePost(): void
     {
-        $this->postService->deletePost($id);
+        $this->postService->deletePost($this->post->id, $this->post->user_id);
 
-        $this->dispatch('updateList', $id);
+        $this->dispatch('updateList');
     }
 
-    public function likePost()
+    public function likePost(): void
     {
-        if (!auth()->hasUser()) {
-            return redirect()->route('login');
+        if (!auth()->check()) {
+            redirect()->route('login');
+            return;
         }
 
         $this->likeService->createLike(auth()->id(), $this->post->id);
     }
 
-    public function unlikePost()
+    public function unlikePost(): void
     {
         $this->likeService->deleteLike(auth()->id(), $this->post->id);
     }

@@ -8,9 +8,8 @@
             </div>
 
         </div>
-        <div class="drawer-side">
-            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-            <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 *:text-lg gap-4">
+        <div class="">
+            <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 *:text-lg gap-4 ">
 
                 <li><a href="{{ route('write') }}" class="btn btn-lg bg-amber-700 text-white">Write A Blog</a></li>
                 <li></li>

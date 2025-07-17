@@ -21,7 +21,7 @@ class PostService {
 
     public function getAllPosts()
     {
-        return Post::all();
+        return Post::orderBy('created_at', 'desc')->get();
     }
 
     public function getPost($id) {
@@ -30,12 +30,16 @@ class PostService {
 
     public function updatePost($id, $request): void
     {
-        if(!auth()->hasUser()) {
+        if(!auth()->check()) {
             redirect()->route('login');
             return;
         }
 
         $post = $this->getPost($id);
+
+        if(auth()->id() !== $post->user_id) {
+            abort(403);
+        }
 
         $post->title = $request['title'];
         $post->body = $request['body'];
@@ -43,11 +47,15 @@ class PostService {
         $post->save();
     }
 
-    public function deletePost($id)
+    public function deletePost($id, $user_id)
     {
-        if(!auth()->hasUser()) {
+        if(!auth()->check()) {
             redirect()->route('login');
             return;
+        }
+
+        if(auth()->id() !== $user_id) {
+            abort(403);
         }
 
         Post::destroy($id);
