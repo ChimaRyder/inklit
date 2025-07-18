@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Comment;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CommentList extends Component
@@ -29,5 +30,7 @@ class CommentList extends Component
             'user_id' => auth()->id(),
             'comment' => $this->comment,
         ]);
+
+        $this->reset('comment');
     }
 }

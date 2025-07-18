@@ -6,6 +6,7 @@ use App\Http\Services\LikeService;
 use App\Http\Services\PostService;
 use App\Models\Like;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class Post extends Component
@@ -16,11 +17,17 @@ class Post extends Component
     public $post;
     public string $date;
 
+    public bool $showComments;
+
     public function boot(LikeService $likeService, PostService $postService)
     {
         $this->likeService = $likeService;
         $this->postService = $postService;
 
+    }
+
+    public function mount() {
+       $this->showComments = Route::currentRouteName() === 'post';
     }
 
     public function render()

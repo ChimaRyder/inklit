@@ -45,7 +45,9 @@
             </div>
         </div>
 
-        <livewire:comment-list :post="$post" wire:key="post-comments-{{ $post->id }}"/>
+        <div class="{{ $showComments ? "" : "hidden" }}">
+            <livewire:comment-list :post="$post" wire:key="post-comments-{{ $post->id }}"/>
+        </div>
 
     </div>
 </div>
