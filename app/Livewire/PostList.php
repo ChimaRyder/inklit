@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Http\Services\PostService;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class PostList extends Component
@@ -12,6 +13,9 @@ class PostList extends Component
 
     public $posts;
 
+    #[Url(as: 'q')]
+    public string $query = '';
+
     public function boot(PostService $postService)
     {
         $this->postService = $postService;
@@ -19,7 +23,7 @@ class PostList extends Component
 
     public function render()
     {
-        $this->posts = $this->postService->getUserPosts(auth()->user()->id);
+        $this->posts = $this->postService->getUserPosts(auth()->user()->id, $this->query);
 
         return view('livewire.post-list');
     }
@@ -28,4 +32,11 @@ class PostList extends Component
     public function updateOnDelete() {
         session()->flash('success', 'Post updated successfully');
     }
+
+    #[On('searchPosts')]
+    public function searchPosts(string $query)
+    {
+        $this->query = $query;
+    }
+
 }

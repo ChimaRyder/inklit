@@ -14,9 +14,13 @@ class PostService {
         ]);
     }
 
-    public function getUserPosts($id)
+    public function getUserPosts($id, $q)
     {
-        return User::find($id)->posts;
+        $posts = User::find($id)->posts;
+
+        return $posts->filter(function ($post) use ($q) {
+            return str_contains($post->body, $q) || str_contains($post->title, $q);
+        });
     }
 
     public function getAllPosts()
