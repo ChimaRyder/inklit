@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class PostsSearchBar extends Component
 {
-    #[Url(as: 'q')]
     public string $query;
 
     public function render()

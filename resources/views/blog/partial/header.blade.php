@@ -4,6 +4,9 @@
             <x-fas-pen-nib class="w-6 h-6 mr-1"/>Inklit
         </a>
     </div>
+    <div class="navbar-center">
+        <livewire:global-search-bar/>
+    </div>
     <div class="navbar-end flex gap-2">
         @if(!auth()->user())
             <a href="{{ route('login') }}" class="btn btn-primary bg-amber-700 border-0 shadow-2xl">Login</a>

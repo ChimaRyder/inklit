@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', [BlogController::class, 'index'])->name('home');
+Route::get('/search',  [BlogController::class, 'search'])->name('search');
 
 //Route::view('dashboard', 'user/index')
 //    ->middleware(['auth', 'verified'])

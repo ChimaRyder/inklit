@@ -27,6 +27,13 @@ class PostService {
     {
         return Post::orderBy('created_at', 'desc')->get();
     }
+    public function getPostsBySearch($search)
+    {
+        return Post::where('body', 'LIKE', "%$search%")
+            ->orWhere('title', 'LIKE', "%$search%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
 
     public function getTrendingPosts()
     {

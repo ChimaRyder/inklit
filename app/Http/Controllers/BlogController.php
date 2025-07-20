@@ -21,4 +21,10 @@ class BlogController extends Controller
 
         return view('blog/index', compact('posts'));
     }
+
+    public function search() {
+        $this->postService->getPostsBySearch(trim(request('q')));
+
+        return view('blog/search', ['search' => request('q')]);
+    }
 }
