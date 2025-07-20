@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow-sm px-10">
+<div class="navbar bg-base-100 shadow-sm px-30">
     <div class="navbar-start flex items-center">
         <a href="{{ route('home') }}" class="btn btn-ghost text-xl">
             <x-fas-pen-nib class="w-6 h-6 mr-1"/>Inklit

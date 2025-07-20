@@ -5,11 +5,21 @@
 
 <div class="flex flex-col gap-2">
     <h3 class="text-lg font-semibold">{{ $post->comments->count() }} {{ $post->comments->count() == 1 ? "Comment" : "Comments" }}</h3>
-    <form wire:submit="submitComment" class="flex gap-2 items-center">
-        <x-fas-user class="w-8 h-8"/>
-        <input type="text" class="input w-full" placeholder="Add a comment..." wire:model="comment" wire:keydown="canSubmitComment"/>
-        <button class="btn bg-amber-700 text-white" {{ !$canSubmit ? "disabled" : "" }}>Comment</button>
-    </form>
+    @if(auth()->check())
+        <form wire:submit="submitComment" class="flex gap-2 items-center">
+            <x-fas-user class="w-8 h-8"/>
+            <input type="text" class="input w-full" placeholder="Add a comment..." wire:model="comment" wire:keydown="canSubmitComment"/>
+            <button class="btn bg-amber-700 text-white" {{ !$canSubmit ? "disabled" : "" }}>Comment</button>
+        </form>
+    @else
+        <div class="flex gap-2 items-center">
+            <x-fas-user class="w-8 h-8"/>
+            <a href="{{ route('login') }}" class="btn bg-amber-700 text-white w-40">Login</a>
+            <p class="text-gray-500">or</p>
+            <a href="{{ route('register') }}" class="btn bg-amber-700 text-white w-40">Register</a>
+        </div>
+    @endif
+
 
     <div>
         @forelse($post->comments as $comment)

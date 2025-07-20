@@ -5,9 +5,10 @@
     {{--Jumbotron--}}
     @include('blog/partial/jumbotron')
 
-    {{--Featured Posts--}}
-{{--    @include('blog/partial/featured')--}}
+    {{--Trending Posts--}}
+    @include('blog/partial/trending')
 
     {{--Footer--}}
+    @include('blog/partial/footer')
 
 @endsection

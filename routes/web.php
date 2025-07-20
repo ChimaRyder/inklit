@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\BlogController;
+
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -8,9 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('blog/index');
-})->name('home');
+Route::get('/', [BlogController::class, 'index'])->name('home');
 
 //Route::view('dashboard', 'user/index')
 //    ->middleware(['auth', 'verified'])

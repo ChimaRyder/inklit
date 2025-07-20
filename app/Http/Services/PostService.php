@@ -28,6 +28,18 @@ class PostService {
         return Post::orderBy('created_at', 'desc')->get();
     }
 
+    public function getTrendingPosts()
+    {
+        $post = Post::withCount('comments', 'likes')
+            ->get();
+
+        $post->each(function ($post) {
+            $post->weightedScore = $post->comments_count * 5 + $post->likes_count;
+        });
+
+        return $post->sortByDesc('weightedScore')->take(5);
+    }
+
     public function getPost($id) {
         return Post::find($id);
     }
