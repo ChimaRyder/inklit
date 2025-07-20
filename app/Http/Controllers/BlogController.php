@@ -13,6 +13,10 @@ class BlogController extends Controller
     }
 
     public function index() {
+        if (auth()->check()) {
+            return redirect('feed');
+        }
+
         $posts = $this->postService->getTrendingPosts();
 
         return view('blog/index', compact('posts'));

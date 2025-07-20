@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-8 h-screen overflow-y-scroll">
+<div class="flex flex-col gap-8 max-h-screen overflow-y-scroll">
     @forelse($posts as $post)
         <livewire:post :post="$post" wire:key="post-{{ $post->id }}"/>
     @empty

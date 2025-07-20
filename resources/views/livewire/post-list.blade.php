@@ -1,5 +1,5 @@
-<div class="flex justify-center">
-   <div class="flex flex-col gap-8 h-200 overflow-y-scroll w-full" wire:loading.remove>
+<div class="flex justify-center max-h-screen">
+   <div class=" flex flex-col gap-8 overflow-y-scroll w-full" wire:loading.remove>
        @forelse($posts as $post)
            <livewire:post :post="$post" wire:key="post-{{ $post->id }}"/>
        @empty
@@ -11,4 +11,6 @@
         <span class="loading loading-dots loading-xl"></span>
         <p class="text-sm">Searching posts...</p>
     </div>
+
+{{--    add Pagination--}}
 </div>

@@ -3,7 +3,7 @@
         <input id="sidebar" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
 
-            <div class="h-screen px-60 pt-5">
+            <div class="flex flex-col px-60 py-8">
                 @yield('dashboard-main')
             </div>
 
