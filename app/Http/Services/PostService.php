@@ -44,7 +44,7 @@ class PostService {
             $post->weightedScore = $post->comments_count * 5 + $post->likes_count;
         });
 
-        return $post->sortByDesc('weightedScore')->take(5);
+        return $post->sortByDesc('weightedScore')->take(7);
     }
 
     public function getPost($id) {
