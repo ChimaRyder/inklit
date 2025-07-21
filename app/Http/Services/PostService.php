@@ -5,6 +5,8 @@ use App\Models\Post;
 use App\Models\User;
 
 class PostService {
+    private int $postsPerPage = 2;
+
     public function createPost($request): void
     {
         Post::create([
@@ -16,23 +18,23 @@ class PostService {
 
     public function getUserPosts($id, $q)
     {
-        $posts = User::find($id)->posts;
-
-        return $posts->filter(function ($post) use ($q) {
-            return str_contains($post->body, $q) || str_contains($post->title, $q);
-        });
+        return Post::where('user_id', "=", $id)
+            ->where('title', "LIKE", '%' . $q . '%')
+            ->orWhere('body', "LIKE", '%' . $q . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->postsPerPage);
     }
 
     public function getAllPosts()
     {
-        return Post::orderBy('created_at', 'desc')->get();
+        return Post::orderBy('created_at', 'desc')->paginate($this->postsPerPage);
     }
     public function getPostsBySearch($search)
     {
         return Post::where('body', 'LIKE', "%$search%")
             ->orWhere('title', 'LIKE', "%$search%")
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate($this->postsPerPage);
     }
 
     public function getTrendingPosts()

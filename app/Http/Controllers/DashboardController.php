@@ -29,7 +29,7 @@ class DashboardController extends Controller
     }
 
     public function profile() {
-
+        return view('user.profile');
     }
 
     public function posts() {
@@ -37,6 +37,6 @@ class DashboardController extends Controller
     }
 
     public function settings() {
-
+        return view('user.settings');
     }
 }

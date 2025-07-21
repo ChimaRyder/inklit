@@ -8,7 +8,7 @@
             </div>
 
         </div>
-        <div class="">
+        <div class="min-h-screen">
             <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 *:text-lg gap-4 ">
 
                 <li><a href="{{ route('write') }}" class="btn btn-lg bg-amber-700 text-white">Write A Blog</a></li>

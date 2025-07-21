@@ -4,12 +4,15 @@ namespace App\Livewire;
 
 use App\Http\Services\PostService;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Feed extends Component
 {
+    use WithPagination;
+
     private PostService $postService;
 
-    public $posts;
+//    public $postList;
 
     public function boot(PostService $postService)
     {
@@ -18,8 +21,8 @@ class Feed extends Component
 
     public function render()
     {
-        $this->posts = $this->postService->getAllPosts();
+        $posts = $this->postService->getAllPosts();
 
-        return view('livewire.feed');
+        return view('livewire.feed',  compact('posts'));
     }
 }

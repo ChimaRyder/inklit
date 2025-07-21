@@ -6,12 +6,13 @@ use App\Http\Services\PostService;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostList extends Component
 {
-    private PostService $postService;
+    use WithPagination;
 
-    public $posts;
+    private PostService $postService;
 
     #[Url(as: 'q')]
     public string $query = '';
@@ -23,9 +24,9 @@ class PostList extends Component
 
     public function render()
     {
-        $this->posts = $this->postService->getUserPosts(auth()->user()->id, $this->query);
+        $posts = $this->postService->getUserPosts(auth()->user()->id, $this->query);
 
-        return view('livewire.post-list');
+        return view('livewire.post-list',  compact('posts'));
     }
 
     #[On('updateList')]
