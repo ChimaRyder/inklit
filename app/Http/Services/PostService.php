@@ -5,7 +5,7 @@ use App\Models\Post;
 use App\Models\User;
 
 class PostService {
-    private int $postsPerPage = 2;
+    private int $postsPerPage = 10;
 
     public function createPost($request): void
     {
@@ -18,9 +18,11 @@ class PostService {
 
     public function getUserPosts($id, $q)
     {
-        return Post::where('user_id', "=", $id)
-            ->where('title', "LIKE", '%' . $q . '%')
-            ->orWhere('body', "LIKE", '%' . $q . '%')
+        return Post::where('user_id', $id)
+            ->where(function ($query) use ($q) {
+                $query->where('title', 'LIKE', '%' . $q . '%')
+                    ->orWhere('body', 'LIKE', '%' . $q . '%');
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($this->postsPerPage);
     }
@@ -75,12 +77,11 @@ class PostService {
     public function deletePost($id, $user_id)
     {
         if(!auth()->check()) {
-            redirect()->route('login');
-            return;
+            return redirect()->route('login');
         }
 
-        if(auth()->id() !== $user_id) {
-            abort(403);
+        if(auth()->id() !== $user_id && auth()->user()->role !== 'admin') {
+            return abort(403);
         }
 
         Post::destroy($id);
