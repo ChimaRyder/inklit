@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/p/{id}', [PostController::class, 'index'])->name('post');
 
 Route::middleware(['auth', 'admin'])->group(function () {
+
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin-users');
     Route::get('/admin/posts', [AdminController::class, 'posts'])->name('admin-posts');
