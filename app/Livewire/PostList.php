@@ -17,6 +17,10 @@ class PostList extends Component
     #[Url(as: 'q')]
     public string $query = '';
 
+    public $user;
+
+    public $subtitle = "You have no posts yet.";
+
     public function boot(PostService $postService)
     {
         $this->postService = $postService;
@@ -24,7 +28,7 @@ class PostList extends Component
 
     public function render()
     {
-        $posts = $this->postService->getUserPosts(auth()->user()->id, $this->query);
+        $posts = $this->postService->getUserPosts($this->user, $this->query);
 
         return view('livewire.post-list',  compact('posts'));
     }

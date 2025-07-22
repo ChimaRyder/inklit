@@ -9,7 +9,7 @@
         </div>
 
         <p>
-            {{ strlen($post->body) >= 20 ? substr($post->body, 0, 20) . "..." : $post->body }}
+            {{ strlen($post->body) >= 200 ? substr($post->body, 0, 200) . "..." : $post->body }}
         </p>
     </div>
 

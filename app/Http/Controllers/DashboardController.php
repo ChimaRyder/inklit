@@ -29,7 +29,7 @@ class DashboardController extends Controller
     }
 
     public function profile() {
-        return view('user.profile');
+        return redirect('/u/'. auth()->id());
     }
 
     public function posts() {

@@ -7,5 +7,5 @@
         <livewire:posts-search-bar/>
     </div>
 
-    <livewire:post-list/>
+    <livewire:post-list user="{{ auth()->id() }}"/>
 @endsection

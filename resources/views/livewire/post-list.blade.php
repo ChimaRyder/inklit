@@ -3,7 +3,7 @@
        @forelse($posts as $post)
            <livewire:post :post="$post" wire:key="post-{{ $post->id }}"/>
        @empty
-           <x-post.no-posts subtitle="You have no posts yet."/>
+           <x-post.no-posts subtitle="{{ $subtitle }}"/>
        @endforelse
    </div>
 

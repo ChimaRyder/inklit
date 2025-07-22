@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogController::class, 'index'])->name('home');
 Route::get('/search',  [BlogController::class, 'search'])->name('search');
+Route::get('/u/{username}', [BlogController::class, 'profile'])->name('user-profile');
 
 Route::middleware(['auth'])->group(function () {
 

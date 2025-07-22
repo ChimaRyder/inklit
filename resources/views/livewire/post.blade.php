@@ -8,7 +8,11 @@
         <div class="flex justify-between items-start">
             <div class="flex flex-col gap-1">
                 <h1 class="text-2xl font-bold">{{ $post->title }}</h1>
-                <a href="{{ route('post', $this->post->id) }}" class="text-sm text-gray-500 hover:underline">{{ Carbon::parse($post->created_at)->diffForHumans() }} by {{ $post->user->name }}</a>
+                <div class="flex text-sm text-gray-500 gap-1">
+                    <a href="{{ route('post', $this->post->id) }}" class="hover:underline">{{ Carbon::parse($post->created_at)->diffForHumans() }}</a>
+                    <p>by</p>
+                    <a href="{{ route('user-profile', $this->post->user_id) }}" class="hover:underline">{{ $post->user->name }}</a>
+                </div>
             </div>
 
             @if(auth()->check())

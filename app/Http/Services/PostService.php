@@ -33,7 +33,11 @@ class PostService {
     }
     public function getPostsBySearch($search)
     {
-        return Post::where('body', 'LIKE', "%$search%")
+        return Post::with('user')
+            ->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->orWhere('body', 'LIKE', "%$search%")
             ->orWhere('title', 'LIKE', "%$search%")
             ->orderBy('created_at', 'desc')
             ->paginate($this->postsPerPage);
@@ -52,7 +56,7 @@ class PostService {
     }
 
     public function getPost($id) {
-        return Post::find($id);
+        return Post::findOrFail($id);
     }
 
     public function updatePost($id, $request): void
