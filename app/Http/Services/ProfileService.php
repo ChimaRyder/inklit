@@ -16,4 +16,8 @@ class ProfileService
             ->orderBy('name', 'desc')
             ->get();
     }
+
+    public function getAllProfiles() {
+        return User::orderBy('name', 'desc')->get();
+    }
 }
