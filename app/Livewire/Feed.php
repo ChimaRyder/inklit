@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Http\Services\PostService;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,5 +25,10 @@ class Feed extends Component
         $posts = $this->postService->getAllPosts();
 
         return view('livewire.feed',  compact('posts'));
+    }
+
+    #[On('updateList')]
+    public function update() {
+        session()->flash('message', 'Post deleted successfully');
     }
 }

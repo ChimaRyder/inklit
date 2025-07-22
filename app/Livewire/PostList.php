@@ -31,7 +31,7 @@ class PostList extends Component
 
     #[On('updateList')]
     public function updateOnDelete() {
-        session()->flash('success', 'Post updated successfully');
+        session()->flash('success', 'Post deleted successfully');
     }
 
     #[On('searchPosts')]
