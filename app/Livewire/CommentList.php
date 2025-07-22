@@ -2,17 +2,24 @@
 
 namespace App\Livewire;
 
+use App\Http\Services\CommentService;
 use App\Models\Comment;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CommentList extends Component
 {
+    private CommentService $commentService;
+
     public $post;
 
     public $comment;
 
     public $canSubmit;
+
+    public function boot(CommentService $commentService) {
+        $this->commentService = $commentService;
+    }
 
     public function render()
     {
@@ -25,11 +32,7 @@ class CommentList extends Component
     }
     public function submitComment()
     {
-        Comment::create([
-            'post_id' => $this->post->id,
-            'user_id' => auth()->id(),
-            'comment' => $this->comment,
-        ]);
+        $this->commentService->createComment($this->post->id, $this->comment);
 
         $this->reset('comment');
     }
